@@ -58,29 +58,29 @@ struct CarWash            //1) a U.D.T. with a random number of member variables
 // public data members and member function
 struct MechanicalTrumpet
  {
-    class Valves
+    class Valves FIXME don't use 'class'
     {
         // valve access is private
         // 1 = valve up, 2 = valve halfway, 3 = valve down
-        private:int valve1 = 1;
-        private:int valve2 = 1;
-	      private:int valve3 = 1;
+        private:int valve1 = 1; FIXME don't use 'private' 
+        private:int valve2 = 1; FIXME don't use 'private' 
+	      private:int valve3 = 1; FIXME don't use 'private' 
 
-        private:void moveValve1( int v1 )
+        private:void moveValve1( int v1 ) FIXME don't use 'private' 
         {
 			      std::cout << "entering private moveValve1 method" << std::endl;
 			      valve1 = v1;
             std::cout << "valve1 =" << valve1 << std::endl;
 			      std::cout << "leaving private moveValve1 method" << std::endl;
         }  
-	      private:void moveValve2( int v2 )
+	      private:void moveValve2( int v2 ) FIXME don't use 'private' 
         {
             std::cout << "entering private moveValve2 method" << std::endl;
 			      valve2 = v2;
             std::cout << "valve2 =" << valve2 << std::endl;
 			      std::cout << "leaving private moveValve1 method" << std::endl;               
         } 
-        private:void moveValve3( int v3 )
+        private:void moveValve3( int v3 ) FIXME don't use 'private' 
         {
             std::cout << "entering private moveValve3 method" << std::endl;
 			      valve3 = v3;
@@ -89,7 +89,7 @@ struct MechanicalTrumpet
         }
         
         // public access to valves
-        public:void setValvePositions( int v1, int v2, int v3 )
+        public:void setValvePositions( int v1, int v2, int v3 ) FIXME don't use 'private' 
         {
             std::cout << "entering public setValvePositions (class valves)..." << std::endl; 
 			      moveValve1(v1);
