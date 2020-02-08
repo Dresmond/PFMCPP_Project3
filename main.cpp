@@ -58,38 +58,37 @@ struct CarWash            //1) a U.D.T. with a random number of member variables
 // public data members and member function
 struct MechanicalTrumpet
  {
-    class Valves FIXME don't use 'class'
+    // remove and replace class Valves with struct Valves
+    struct Valves
     {
         // valve access is private
         // 1 = valve up, 2 = valve halfway, 3 = valve down
-        private:int valve1 = 1; FIXME don't use 'private' 
-        private:int valve2 = 1; FIXME don't use 'private' 
-	      private:int valve3 = 1; FIXME don't use 'private' 
+        int valve1 = 1;
+        int valve2 = 1;
+	      int valve3 = 1;
 
-        private:void moveValve1( int v1 ) FIXME don't use 'private' 
+        void moveValve1( int v1 )
         {
 			      std::cout << "entering private moveValve1 method" << std::endl;
 			      valve1 = v1;
             std::cout << "valve1 =" << valve1 << std::endl;
 			      std::cout << "leaving private moveValve1 method" << std::endl;
         }  
-	      private:void moveValve2( int v2 ) FIXME don't use 'private' 
+	      void moveValve2( int v2 )
         {
             std::cout << "entering private moveValve2 method" << std::endl;
 			      valve2 = v2;
             std::cout << "valve2 =" << valve2 << std::endl;
 			      std::cout << "leaving private moveValve1 method" << std::endl;               
         } 
-        private:void moveValve3( int v3 ) FIXME don't use 'private' 
+        void moveValve3( int v3 )
         {
             std::cout << "entering private moveValve3 method" << std::endl;
 			      valve3 = v3;
             std::cout << "valve3 =" << valve3 << std::endl;
 			      std::cout << "leaving private moveValve3 method" << std::endl;               
         }
-        
-        // public access to valves
-        public:void setValvePositions( int v1, int v2, int v3 ) FIXME don't use 'private' 
+        void setValvePositions( int v1, int v2, int v3 )
         {
             std::cout << "entering public setValvePositions (class valves)..." << std::endl; 
 			      moveValve1(v1);
@@ -98,7 +97,7 @@ struct MechanicalTrumpet
 			      std::cout << "returning from setValvePositions..." << std::endl;
         }
         
-    };  // end class Valves
+    };  // end struct Valves
     
     // continue struct mechanicalTrumpet variables and member functions  
     // public function access to remaining parts of note 
