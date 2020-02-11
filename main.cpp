@@ -67,28 +67,28 @@ struct MechanicalTrumpet
         int valve2 = 1;
 	      int valve3 = 1;
 
-        void moveValve1( int v1 )
+        void moveValve1(int v1)
         {
 			      std::cout << "entering private moveValve1 method" << std::endl;
 			      valve1 = v1;
             std::cout << "valve1 =" << valve1 << std::endl;
 			      std::cout << "leaving private moveValve1 method" << std::endl;
         }  
-	      void moveValve2( int v2 )
+	      void moveValve2(int v2)
         {
             std::cout << "entering private moveValve2 method" << std::endl;
 			      valve2 = v2;
             std::cout << "valve2 =" << valve2 << std::endl;
 			      std::cout << "leaving private moveValve1 method" << std::endl;               
         } 
-        void moveValve3( int v3 )
+        void moveValve3(int v3)
         {
             std::cout << "entering private moveValve3 method" << std::endl;
 			      valve3 = v3;
             std::cout << "valve3 =" << valve3 << std::endl;
 			      std::cout << "leaving private moveValve3 method" << std::endl;               
         }
-        void setValvePositions( int v1, int v2, int v3 )
+        void setValvePositions(int v1, int v2, int v3)
         {
             std::cout << "entering public setValvePositions (class valves)..." << std::endl; 
 			      moveValve1(v1);
@@ -109,7 +109,7 @@ struct MechanicalTrumpet
 	  // tempo as bpm, min = 60, max = 200
 	  int tempoBPM = 100; 
 
-    void setNote( int s, int l, int t )
+    void setNote(int s, int l, int t)
         {
             slot = s;
             noteLength = l;
@@ -155,9 +155,9 @@ struct SyncShift
     //
     ///////////////////////////////////////////////////////////
     
-	  int setKnob1( int k1 ) { knob1 = k1; return knob1; } 
-    int setKnob2( int k2 ) { knob2 = k2; return knob2; } 
-	  int setKnob3( int k3 ) { knob1 = k3; return knob3; } 
+	  int setKnob1(int k1) { knob1 = k1; return knob1; } 
+    int setKnob2(int k2) { knob2 = k2; return knob2; } 
+	  int setKnob3(int k3) { knob1 = k3; return knob3; } 
 	
 	  ///////////////////////////////////////////////////////////
 	  //
@@ -165,7 +165,7 @@ struct SyncShift
     //
     ///////////////////////////////////////////////////////////   
 
-    double setKnob4( double k4 ) { knob4 = k4; return knob4; }
+    double setKnob4(double k4) { knob4 = k4; return knob4; }
 
 }; // end Struct SyncShift
 
