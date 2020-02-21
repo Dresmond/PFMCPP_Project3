@@ -199,8 +199,6 @@ struct MechanicalTrumpetV2
 
 struct ElevatorDoors
 {
-    void closeDoors(); 
-    void openDoors();  
     bool doorsOpen = 1;
     bool doorsClosed = 0;
     bool doorsLocked = 0;
@@ -214,7 +212,7 @@ struct ElevatorFloor
 {
     int previousFloor = 0;
     int currentFloor = 0;
-    int nextFloor = 0;
+    int nextFloor = 0; 
 };
 /* 
 9) ElevatorCar UDT (embedded structure has embedded structures)
@@ -223,9 +221,10 @@ struct ElevatorCar
 { 
     ElevatorDoors doors;    // embedded structure 
     ElevatorFloor floor;    // embedded structure
+
+    void closeDoors( ElevatorDoors doors );
+    void openDoors( ElevatorDoors doors );
 };
-/* 
-10) ElevatorSystem UDT (embeds other structures, no primitives)
 
 /* 
 10) ElevatorSystem UDT (embeds other structures, no primitives)
@@ -236,6 +235,13 @@ struct ElevatorSystem
     ElevatorCar car2;        // embedded structure
     ElevatorCar car3;        // embedded structure
     ElevatorCar car4;        // embedded structure    
+
+
+    // move down from current floor 
+    void floorDown( int downTarget );
+    // move up from current floor
+    void floorUp( int upTarget ); 
+
 };	
 
 
