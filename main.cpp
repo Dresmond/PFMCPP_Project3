@@ -11,9 +11,37 @@ Create a branch named Part2
     you should be able to deduce the return type of those functions based on their usage in Person::run()
     You'll need to insert the Person struct from the video in the space below.
  */
+struct Person
+{
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+
+    void run( int howFast, bool startWithLeftFoot );
+};
 
 
-
+struct Foot
+{
+    // Foot variables
+    int numToes = 10;
+    int stepFeet = 2;
+    // declare Foot member functions
+    int stepSize();
+    int stepForward();
+       
+};
+// implement Foot member functions
+int Foot::stepForward()
+{
+    return stepSize();
+}
+int Foot::stepSize()
+{
+    return Foot::stepFeet;
+}
 
 
  /*
@@ -47,51 +75,88 @@ struct MechanicalTrumpet
         int valve2 = 1;
         int valve3 = 1;
 
-        void moveValve1(int v1)
-        {
-            valve1 = v1;
-        }  
-        void moveValve2(int v2)
-        {
-            valve2 = v2;             
-        } 
-        void moveValve3(int v3)
-        {
-            valve3 = v3;             
-        }
-        void setValvePositions(int v1, int v2, int v3)
-        {
-            moveValve1(v1);
-            moveValve2(v2);
-            moveValve3(v3);
-        }
+        void moveValve1(int v1);
+        void moveValve2(int v2);        
+        void moveValve3(int v3);
+        void setValvePositions(int v1, int v2, int v3);
+        
 
     };  
-
+   
     int slot = 2; 
     int noteLength = 4;
     int tempoBPM = 100; 
 
-    void setNote(int s, int l, int t)
-    {
-        slot = s;
-        noteLength = l;
-        tempoBPM = t;
-    } 
+    // set note variables
+    void setNote(int s, int l, int t);
+     
     // set slot number  
-    void setSlot();
+    void setSlot( int slot );
 
     // set note length
-    void setNoteLength();
+    void setNoteLength( int noteLength );
 
     // set tempo
-    void setTempo(); 
+    void setTempo( int tempoBPM); 
 
     // play note with current valve and slot positions 
-    void playNote();
+    void playNote(int slot, int noteLength, int tempoBPM );
+    
 
 }; // end struct MechanicalTrumpet
 
+// implement MechanicalTrumpet::Valves::moveValve1
+void MechanicalTrumpet::Valves::moveValve1(int v1)
+{
+    Valves::valve1 = v1;
+}
+// implement MechanicalTrumpet::Valves::moveValve2
+void MechanicalTrumpet::Valves::moveValve2(int v2)
+{
+    Valves::valve2 = v2;
+}
+// implement MechanicalTrumpet::Valves::moveValve3
+void MechanicalTrumpet::Valves::moveValve3(int v3)
+{
+    Valves::valve3 = v3;
+}
+// implement MechanicalTrumpet::Valves::setValvePositions
+void MechanicalTrumpet::Valves::setValvePositions(int v1, int v2, int v3)
+{
+    moveValve1(v1);
+    moveValve2(v2);
+    moveValve3(v3);
+}
+// implement MechanicalTrumpet::setNote
+void MechanicalTrumpet::setNote(int s, int l, int t)
+{
+    slot = s;
+    noteLength = l;
+    tempoBPM = t;
+} 
+
+// implement MechanicalTrumpet::setSlot
+void MechanicalTrumpet::setSlot( int s ) 
+{
+    slot = s;
+}
+// implement MechanicalTrumpet::setNoteLength
+void MechanicalTrumpet::setNoteLength( int n ) 
+{
+    noteLength = n;
+}
+// implement MechanicalTrumpet::setTempo
+void MechanicalTrumpet::setTempo( int t ) 
+{
+    tempoBPM = t;
+}
+// implement MechanicalTrumpet::playNote
+void MechanicalTrumpet::playNote( int s, int n, int t )
+{
+    setSlot(s);
+    setNoteLength(n);
+    setTempo(t);
+}
 /* 
 2) Innerclock syncShift UDT
 */ 
@@ -112,9 +177,9 @@ struct SyncShift
     //
     ///////////////////////////////////////////////////////////
 
-    int setKnob1(int k1) { knob1 = k1; return knob1; } 
-    int setKnob2(int k2) { knob2 = k2; return knob2; } 
-    int setKnob3(int k3) { knob1 = k3; return knob3; } 
+    int setKnob1(int k1);  
+    int setKnob2(int k2);  
+    int setKnob3(int k3);  
 
     ///////////////////////////////////////////////////////////
     //
@@ -122,10 +187,17 @@ struct SyncShift
     //
     ///////////////////////////////////////////////////////////   
 
-    double setKnob4(double k4) { knob4 = k4; return knob4; }
+    double setKnob4(double k4);
 
 };  // end Struct SyncShift
-
+// implement SyncShift::setKnob1
+int SyncShift::setKnob1(int k1) { knob1 = k1; return knob1; } 
+// implement SyncShift::setKnob2
+int SyncShift::setKnob2(int k2) { knob2 = k2; return knob2; }
+// implement SyncShift::setKnob3
+int SyncShift::setKnob3(int k3) { knob1 = k3; return knob3; }
+// implement SyncShift::setKnob4
+double SyncShift::setKnob4(double k4) { knob4 = k4; return knob4; }
 /* 
 3) mechanicalTrumpetV2 UDT (structures within a structure)
 */
@@ -198,7 +270,18 @@ struct ElevatorCar
     void closeDoors( ElevatorDoors doors );
     void openDoors( ElevatorDoors doors );
 };
-
+// implement ElevatorCar::closeDoors
+void ElevatorCar::closeDoors(ElevatorDoors d)
+{
+    d.doorsClosed = 1;
+    d.doorsOpen = 0;
+}
+// implement ElevatorCar::openDoors
+void ElevatorCar::openDoors(ElevatorDoors d)
+{
+    d.doorsOpen = 1;
+    d.doorsClosed = 0;
+}
 /* 
 10) ElevatorSystem UDT (embeds other structures, no primitives)
 */
@@ -209,17 +292,77 @@ struct ElevatorSystem
     ElevatorCar car3;        // embedded structure
     ElevatorCar car4;        // embedded structure    
 
-
     // move down from current floor 
-    void floorDown( int downTarget );
+    // void floorDown( int downTarget );
+    void e1FloorDown ( ElevatorCar car1 );
+    void e2FloorDown ( ElevatorCar car2 );
+    void e3FloorDown ( ElevatorCar car3 );
+    void e4FloorDown ( ElevatorCar car4 );
     // move up from current floor
-    void floorUp( int upTarget ); 
-
+    // void floorUp( int upTarget ); 
+    void e1FloorUp ( ElevatorCar car1 );
+    void e2FloorUp ( ElevatorCar car2 );
+    void e3FloorUp ( ElevatorCar car3 );
+    void e4FloorUp ( ElevatorCar car4 );
 };	
-
-
-
-
+// implement ElevatorSystem::floorDown for each car
+void ElevatorSystem::e1FloorDown ( ElevatorCar c1 )
+{
+    c1.floor.previousFloor = c1.floor.currentFloor;
+    c1.floor.nextFloor = c1.floor.currentFloor - 1;
+    // insert code that move car down
+    c1.floor.currentFloor = c1.floor.nextFloor;   
+}
+void ElevatorSystem::e2FloorDown ( ElevatorCar c2 )
+{
+    c2.floor.previousFloor = c2.floor.currentFloor;
+    c2.floor.nextFloor = c2.floor.currentFloor - 1;
+    // insert code that move car down
+    c2.floor.currentFloor = c2.floor.nextFloor;   
+}
+void ElevatorSystem::e3FloorDown ( ElevatorCar c3 )
+{
+    c3.floor.previousFloor = c3.floor.currentFloor;
+    c3.floor.nextFloor = c3.floor.currentFloor - 1;
+    // insert code that move car down
+    c3.floor.currentFloor = c3.floor.nextFloor;   
+}
+void ElevatorSystem::e4FloorDown ( ElevatorCar c4 )
+{
+    c4.floor.previousFloor = c4.floor.currentFloor;
+    c4.floor.nextFloor = c4.floor.currentFloor - 1;
+    // insert code that move car down
+    c4.floor.currentFloor = c4.floor.nextFloor;   
+}
+// implement ElevatorSystem::floorUp for each car
+void ElevatorSystem::e1FloorUp ( ElevatorCar c1 )
+{
+    c1.floor.previousFloor = c1.floor.currentFloor;
+    c1.floor.nextFloor = c1.floor.currentFloor + 1;
+    // insert code that move car up
+    c1.floor.currentFloor = c1.floor.nextFloor;   
+}
+void ElevatorSystem::e2FloorUp ( ElevatorCar c2 )
+{
+    c2.floor.previousFloor = c2.floor.currentFloor;
+    c2.floor.nextFloor = c2.floor.currentFloor + 1;
+    // insert code that move car up
+    c2.floor.currentFloor = c2.floor.nextFloor;   
+}
+void ElevatorSystem::e3FloorUp ( ElevatorCar c3 )
+{
+    c3.floor.previousFloor = c3.floor.currentFloor;
+    c3.floor.nextFloor = c3.floor.currentFloor + 1;
+    // insert code that move car up
+    c3.floor.currentFloor = c3.floor.nextFloor;   
+}
+void ElevatorSystem::e4FloorUp ( ElevatorCar c4 )
+{
+    c4.floor.previousFloor = c4.floor.currentFloor;
+    c4.floor.nextFloor = c4.floor.currentFloor + 1;
+    // insert code that move car up
+    c4.floor.currentFloor = c4.floor.nextFloor;   
+}
 #include <iostream>
 int main()
 {
