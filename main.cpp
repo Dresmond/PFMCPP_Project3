@@ -107,15 +107,15 @@ struct MechanicalTrumpet
 
 void MechanicalTrumpet::Valves::moveValve1(int v1)
 {
-    Valves::valve1 = v1;
+    valve1 = v1;
 }
 void MechanicalTrumpet::Valves::moveValve2(int v2)
 {
-    Valves::valve2 = v2;
+    valve2 = v2;
 }
 void MechanicalTrumpet::Valves::moveValve3(int v3)
 {
-    Valves::valve3 = v3;
+    valve3 = v3;
 }
 void MechanicalTrumpet::Valves::setValvePositions(int v1, int v2, int v3)
 {
