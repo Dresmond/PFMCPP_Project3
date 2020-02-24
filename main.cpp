@@ -319,9 +319,11 @@ struct ElevatorSystem
         if( carNum >= cars.size() )
             return false;
 
-        up ? cars[carNum].floorUp() : cars[carNum].floorDown();
+        if( up )
+            return cars[carNum].floorUp();
 
-        return true;
+        return cars[carNum].floorDown();
+        // return up ? cars[carNum].floorUp() : cars[carNum].floorDown();
     }
 };	
 
