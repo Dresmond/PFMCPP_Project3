@@ -224,10 +224,12 @@ struct MechanicalTrumpetV2
 
 struct ElevatorDoors
 {
-    bool doorsOpen = 1;
-    bool doorsClosed = 0;
-    bool doorsLocked = 0;
-    bool doorsUnlocked = 0;
+    bool locked { true };
+    bool closed { true };
+    void open() { locked = false; closed = false; }
+    void close() { locked = true; closed = true; } 
+    bool isClosedAndLocked( ) { return closed && locked; }
+
 };	
 
 /* 
@@ -239,18 +241,25 @@ struct ElevatorFloor
     int currentFloor = 0;
     int nextFloor = 0;
 
-    void floorDown()
+    bool floorDown()
     {
+        /*
+        This should check if currentFloor - 1 is >= 0.  you don't want to go to negative floor numbers. 
+        */
         previousFloor = currentFloor;
         nextFloor = currentFloor - 1;
-        currentFloor = nextFloor;   
+        currentFloor = nextFloor;
+        return true; 
     }
-    void floorUp()
+    bool floorUp()
     {
+        /*
+        This should check if currentFloor + 1 <= max floor.  you don't want to go past your top floor.
+        */
         previousFloor = currentFloor;
         nextFloor = currentFloor + 1;
         currentFloor = nextFloor;
-           
+        return true;     
     }  
 };
 /* 
@@ -261,87 +270,63 @@ struct ElevatorCar
     ElevatorDoors doors;    // elevator car has a doors structure 
     ElevatorFloor floor;    // elevator car has a floor structure
 
-    void closeDoors( ElevatorDoors& doors );
-    void openDoors( ElevatorDoors& doors );
-    void floorDown( )
+    void closeDoors();
+    void openDoors();
+
+    bool okToMove() { return doors.isClosedAndLocked(); }
+
+    bool floorDown( )
     {
-        floor.floorDown();
+        if( okToMove() )
+            return floor.floorDown();
+
+        //else you forgot to close and lock your doors.
+        return false;
     }
-    void floorUp( )
+    bool floorUp( )
     {
-        floor.floorUp();
+        if( okToMove() )
+            return floor.floorUp();
+    
+        //else you forgot to close and lock your doors.
+        return false;
     }
 };
 // implement ElevatorCar::closeDoors
-void ElevatorCar::closeDoors(ElevatorDoors& d)
+void ElevatorCar::closeDoors()
 {
-    d.doorsClosed = 1;
-    d.doorsOpen = 0;
+    doors.close();
 }
 // implement ElevatorCar::openDoors
-void ElevatorCar::openDoors(ElevatorDoors& d)
+void ElevatorCar::openDoors()
 {
-    d.doorsOpen = 1;
-    d.doorsClosed = 0;
+    doors.open();
 }
 /* 
 10) ElevatorSystem UDT (embeds other structures, no primitives)
 */
+#include <vector>
 struct ElevatorSystem
-{
-    ElevatorCar car1;        // elevator system has four cars
-    ElevatorCar car2;         
-    ElevatorCar car3;         
-    ElevatorCar car4;             
-
-    // move down from current floor 
-    void e1FloorDown ( );
-    void e2FloorDown ( );
-    void e3FloorDown ( );
-    void e4FloorDown ( );
+{       
+    std::vector<ElevatorCar> cars { 4 };
     
-    // move up from current floor
-    void e1FloorUp ( );
-    void e2FloorUp ( );
-    void e3FloorUp ( );
-    void e4FloorUp ( );
+    /**
+    moves the car carNum either up or down.
+    returns true if the car moved, false if the car didn't move
+    */
+    bool move(size_t carNum, bool up)
+    {
+        if( carNum >= cars.size() )
+            return false;
+
+        if( up )
+            return cars[carNum].floorUp();
+
+        return cars[carNum].floorDown();
+        // return up ? cars[carNum].floorUp() : cars[carNum].floorDown();
+    }
 };	
 
-// implement ElevatorSystem::floorDown for each car
-void ElevatorSystem::e1FloorDown( )
-{
-    car1.floorDown();
-}
-void ElevatorSystem::e2FloorDown ( )
-{
-    car2.floorDown();
-}
-void ElevatorSystem::e3FloorDown ( )
-{
-    car3.floorDown();
-}
-void ElevatorSystem::e4FloorDown ( )
-{
-    car4.floorDown();
-}
-// implement ElevatorSystem::floorUp for each car
-// implement ElevatorSystem::floorDown for each car
-void ElevatorSystem::e1FloorUp( )
-{
-    car1.floorUp();
-}
-void ElevatorSystem::e2FloorUp ( )
-{
-    car2.floorUp();
-}
-void ElevatorSystem::e3FloorUp ( )
-{
-    car3.floorUp();
-}
-void ElevatorSystem::e4FloorUp ( )
-{
-    car4.floorUp();
-}
 #include <iostream>
 int main()
 {
