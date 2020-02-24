@@ -190,13 +190,10 @@ struct SyncShift
     double setKnob4(double k4);
 
 };  // end Struct SyncShift
-// implement SyncShift::setKnob1
+
 int SyncShift::setKnob1(int k1) { knob1 = k1; return knob1; } 
-// implement SyncShift::setKnob2
 int SyncShift::setKnob2(int k2) { knob2 = k2; return knob2; }
-// implement SyncShift::setKnob3
 int SyncShift::setKnob3(int k3) { knob1 = k3; return knob3; }
-// implement SyncShift::setKnob4
 double SyncShift::setKnob4(double k4) { knob4 = k4; return knob4; }
 /* 
 3) mechanicalTrumpetV2 UDT (structures within a structure)
@@ -264,20 +261,20 @@ struct ElevatorFloor
 */
 struct ElevatorCar
 { 
-    ElevatorDoors doors;    // embedded structure 
-    ElevatorFloor floor;    // embedded structure
+    ElevatorDoors& doors;    // elevator car has a doors structure 
+    ElevatorFloor& floor;    // elevator car has a floor structure
 
-    void closeDoors( ElevatorDoors doors );
-    void openDoors( ElevatorDoors doors );
+    void closeDoors( ElevatorDoors& doors );
+    void openDoors( ElevatorDoors& doors );
 };
 // implement ElevatorCar::closeDoors
-void ElevatorCar::closeDoors(ElevatorDoors d)
+void ElevatorCar::closeDoors(ElevatorDoors& d)
 {
     d.doorsClosed = 1;
     d.doorsOpen = 0;
 }
 // implement ElevatorCar::openDoors
-void ElevatorCar::openDoors(ElevatorDoors d)
+void ElevatorCar::openDoors(ElevatorDoors& d)
 {
     d.doorsOpen = 1;
     d.doorsClosed = 0;
@@ -287,80 +284,80 @@ void ElevatorCar::openDoors(ElevatorDoors d)
 */
 struct ElevatorSystem
 {
-    ElevatorCar car1;        // embedded structure
-    ElevatorCar car2;        // embedded structure
-    ElevatorCar car3;        // embedded structure
-    ElevatorCar car4;        // embedded structure    
+    ElevatorCar car1;        // elevator system has four cars
+    ElevatorCar car2;         
+    ElevatorCar car3;         
+    ElevatorCar car4;             
 
     // move down from current floor 
-    // void floorDown( int downTarget );
-    void e1FloorDown ( ElevatorCar car1 );
-    void e2FloorDown ( ElevatorCar car2 );
-    void e3FloorDown ( ElevatorCar car3 );
-    void e4FloorDown ( ElevatorCar car4 );
+    void e1FloorDown ( ElevatorCar& car1 );
+    void e2FloorDown ( ElevatorCar& car2 );
+    void e3FloorDown ( ElevatorCar& car3 );
+    void e4FloorDown ( ElevatorCar& car4 );
+    
     // move up from current floor
-    // void floorUp( int upTarget ); 
-    void e1FloorUp ( ElevatorCar car1 );
-    void e2FloorUp ( ElevatorCar car2 );
-    void e3FloorUp ( ElevatorCar car3 );
-    void e4FloorUp ( ElevatorCar car4 );
+    void e1FloorUp ( ElevatorCar& car1 );
+    void e2FloorUp ( ElevatorCar& car2 );
+    void e3FloorUp ( ElevatorCar& car3 );
+    void e4FloorUp ( ElevatorCar& car4 );
 };	
+
 // implement ElevatorSystem::floorDown for each car
-void ElevatorSystem::e1FloorDown ( ElevatorCar c1 )
+void ElevatorSystem::e1FloorDown ( ElevatorCar& c1 )
 {
     c1.floor.previousFloor = c1.floor.currentFloor;
     c1.floor.nextFloor = c1.floor.currentFloor - 1;
-    // insert code that move car down
+    // insert code that moves car down
     c1.floor.currentFloor = c1.floor.nextFloor;   
 }
-void ElevatorSystem::e2FloorDown ( ElevatorCar c2 )
+void ElevatorSystem::e2FloorDown ( ElevatorCar& c2 )
 {
     c2.floor.previousFloor = c2.floor.currentFloor;
     c2.floor.nextFloor = c2.floor.currentFloor - 1;
-    // insert code that move car down
+    // insert code that moves car down
     c2.floor.currentFloor = c2.floor.nextFloor;   
 }
-void ElevatorSystem::e3FloorDown ( ElevatorCar c3 )
+void ElevatorSystem::e3FloorDown ( ElevatorCar& c3 )
 {
     c3.floor.previousFloor = c3.floor.currentFloor;
     c3.floor.nextFloor = c3.floor.currentFloor - 1;
-    // insert code that move car down
+    // insert code that moves car down
     c3.floor.currentFloor = c3.floor.nextFloor;   
 }
-void ElevatorSystem::e4FloorDown ( ElevatorCar c4 )
+void ElevatorSystem::e4FloorDown ( ElevatorCar& c4 )
 {
     c4.floor.previousFloor = c4.floor.currentFloor;
     c4.floor.nextFloor = c4.floor.currentFloor - 1;
-    // insert code that move car down
+    // insert code that moves car down
     c4.floor.currentFloor = c4.floor.nextFloor;   
 }
 // implement ElevatorSystem::floorUp for each car
-void ElevatorSystem::e1FloorUp ( ElevatorCar c1 )
+void ElevatorSystem::e1FloorUp ( ElevatorCar& c1 )
 {
     c1.floor.previousFloor = c1.floor.currentFloor;
     c1.floor.nextFloor = c1.floor.currentFloor + 1;
-    // insert code that move car up
+    // insert code that moves car up
     c1.floor.currentFloor = c1.floor.nextFloor;   
 }
-void ElevatorSystem::e2FloorUp ( ElevatorCar c2 )
+void ElevatorSystem::e2FloorUp ( ElevatorCar& c2 )
 {
     c2.floor.previousFloor = c2.floor.currentFloor;
     c2.floor.nextFloor = c2.floor.currentFloor + 1;
-    // insert code that move car up
+    // insert code that moves car up
     c2.floor.currentFloor = c2.floor.nextFloor;   
 }
-void ElevatorSystem::e3FloorUp ( ElevatorCar c3 )
+void ElevatorSystem::e3FloorUp ( ElevatorCar& c3 )
 {
     c3.floor.previousFloor = c3.floor.currentFloor;
     c3.floor.nextFloor = c3.floor.currentFloor + 1;
-    // insert code that move car up
+    // insert code that moves car up
     c3.floor.currentFloor = c3.floor.nextFloor;   
 }
-void ElevatorSystem::e4FloorUp ( ElevatorCar c4 )
+void ElevatorSystem::e4FloorUp ( ElevatorCar& c4 )
 {
     c4.floor.previousFloor = c4.floor.currentFloor;
     c4.floor.nextFloor = c4.floor.currentFloor + 1;
-    // insert code that move car up
+    // insert code that moves car up
     c4.floor.currentFloor = c4.floor.nextFloor;   
 }
 #include <iostream>
